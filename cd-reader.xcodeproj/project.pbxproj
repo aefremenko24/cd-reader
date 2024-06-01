@@ -11,6 +11,7 @@
 		41643F0A2C0AE83F00EBE3B2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41643F092C0AE83F00EBE3B2 /* ContentView.swift */; };
 		41643F0C2C0AE84000EBE3B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41643F0B2C0AE84000EBE3B2 /* Assets.xcassets */; };
 		41643F0F2C0AE84000EBE3B2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41643F0E2C0AE84000EBE3B2 /* Preview Assets.xcassets */; };
+		41C750E52C0AEE5A000F8ED2 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 41C750E42C0AEE5A000F8ED2 /* CodeScanner */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41C750E52C0AEE5A000F8ED2 /* CodeScanner in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +85,9 @@
 			dependencies = (
 			);
 			name = "cd-reader";
+			packageProductDependencies = (
+				41C750E42C0AEE5A000F8ED2 /* CodeScanner */,
+			);
 			productName = "cd-reader";
 			productReference = 41643F042C0AE83F00EBE3B2 /* cd-reader.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +116,9 @@
 				Base,
 			);
 			mainGroup = 41643EFB2C0AE83F00EBE3B2;
+			packageReferences = (
+				41C750E32C0AEE5A000F8ED2 /* XCRemoteSwiftPackageReference "CodeScanner" */,
+			);
 			productRefGroup = 41643F052C0AE83F00EBE3B2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -275,11 +283,14 @@
 				DEVELOPMENT_TEAM = 2R48S3Q5D4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera be used to scan barcodes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,11 +315,14 @@
 				DEVELOPMENT_TEAM = 2R48S3Q5D4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera be used to scan barcodes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -344,6 +358,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		41C750E32C0AEE5A000F8ED2 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		41C750E42C0AEE5A000F8ED2 /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 41C750E32C0AEE5A000F8ED2 /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 41643EFC2C0AE83F00EBE3B2 /* Project object */;
 }
