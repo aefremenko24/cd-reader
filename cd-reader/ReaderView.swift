@@ -9,6 +9,8 @@ import SwiftUI
 import CodeScanner
 
 struct ContentView: View {
+    @EnvironmentObject private var storedItems: StoredItems
+    
     @State var isPresentingScanner = false
     @State var scannedCode: String = "Scan a barcode to get started."
     
