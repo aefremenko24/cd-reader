@@ -8,13 +8,49 @@
 import Foundation
 
 class StoredItems: ObservableObject {
-    @Published var storedCodes = [String]()
+    @Published var storedCodes = [Code]()
     
-    func addToStorage(code: String) {
+    func addToStorage(code: Code) {
         self.storedCodes.append(code)
     }
     
-    func getItems() -> [String] {
+    func getItems() -> [Code] {
         return storedCodes
+    }
+    
+    func removeItem(at: Int) {
+        if (storedCodes.count > at) {
+            self.storedCodes.remove(at: at)
+        }
+    }
+    
+    func contains(code: Code) -> Bool {
+        var doesContain = false
+        
+        for currentCode in self.storedCodes {
+            if currentCode.getValue() == code.getValue() {
+                doesContain = true
+            }
+        }
+        
+        return doesContain
+    }
+}
+
+struct Code: Hashable {
+    let value: String
+    let object: String
+    let color: String
+    
+    func getValue() -> String {
+        return self.value
+    }
+    
+    func getObject() -> String {
+        return self.object
+    }
+    
+    func getColor() -> String {
+        return self.color
     }
 }

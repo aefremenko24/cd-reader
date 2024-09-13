@@ -6,10 +6,34 @@
 //
 
 import SwiftUI
+import CodeScanner
 
 struct StorageView: View {
+    @EnvironmentObject var storedItems: StoredItems
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            List {
+                Section("Your Barcodes") {
+                    Button("Add Barcode") {
+                        ReaderView()
+                    }
+                    ForEach(self.storedItems.getItems(), id: \.self) { code in
+                        NavigationLink(value: code){
+                            Text(code.getValue())
+                        }
+                    }
+                    .onDelete { storedItems.removeItem(at: $0 == code)
+                    }
+                }
+            }
+            .navigationTitle("Storage")
+            .navigationDestination(for: Code.self) { code in
+                ZStack {
+                    Text(code.getValue())
+                }
+            }
+        }
     }
 }
 

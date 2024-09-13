@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct cd_readerApp: App {
+    @StateObject var storedItems = StoredItems()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
+                .environmentObject(self.storedItems)
         }
     }
+    
 }

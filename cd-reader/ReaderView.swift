@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  ReaderView.swift
 //  cd-reader
 //
 //  Created by Arthur Efremenko on 5/31/24.
@@ -8,18 +8,27 @@
 import SwiftUI
 import CodeScanner
 
-struct ContentView: View {
-    @EnvironmentObject private var storedItems: StoredItems
+struct ReaderView: View {
+    @EnvironmentObject var storedItems: StoredItems
     
     @State var isPresentingScanner = false
     @State var scannedCode: String = "Scan a barcode to get started."
     
     var scannerSheet : some View {
         CodeScannerView(
-            codeTypes: [.qr, .upce, .ean8, .ean13],
+            codeTypes: [.upce, .ean8, .ean13],
             completion: { result in
                 if case let .success(code) = result {
-                    self.scannedCode = code.string
+                    
+                    let newCode = Code(value: code.string, object: "None", color: "None")
+                    
+                    if (storedItems.contains(code: newCode)) {
+                        self.scannedCode = newCode.getValue() + " is already in the storage"
+                    }
+                    else {
+                        self.scannedCode = newCode.getValue() + " has been added to the storage"
+                        self.storedItems.addToStorage(code: newCode)
+                    }
                     self.isPresentingScanner = false
                 }
             }
@@ -30,10 +39,9 @@ struct ContentView: View {
         VStack(spacing: 10) {
             Text(scannedCode)
             
-            Button("Scan barcode") {
+            Button("Scan barcode", systemImage: "barcode.viewfinder") {
                 self.isPresentingScanner = true
             }
-            
             .sheet(isPresented: $isPresentingScanner) {
                 self.scannerSheet
             }
@@ -42,5 +50,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ReaderView()
 }
