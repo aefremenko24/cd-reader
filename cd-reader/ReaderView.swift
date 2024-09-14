@@ -30,6 +30,7 @@ struct ReaderView: View {
                         self.storedItems.addToStorage(code: newCode)
                     }
                     self.isPresentingScanner = false
+                    self.storedItems.addToStorage(code: Code(value: "1234567890", object: "None", color: "None"))
                 }
             }
         )
