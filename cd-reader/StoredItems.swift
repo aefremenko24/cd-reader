@@ -9,14 +9,10 @@ import Foundation
 
 @MainActor
 class StoredItems: ObservableObject, Codable {
-    @Published var storedCodes: [Code] = []
+    @Published var storedCodes: [Code] = [Code(value: "1234567890")]
     
     func addToStorage(code: Code) {
         self.storedCodes.append(code)
-    }
-    
-    func getItems() -> [Code] {
-        return storedCodes
     }
     
     func removeItem(at: IndexSet) {
@@ -27,7 +23,7 @@ class StoredItems: ObservableObject, Codable {
         var doesContain = false
         
         for currentCode in self.storedCodes {
-            if currentCode.getValue() == code.getValue() {
+            if currentCode.value == code.value {
                 doesContain = true
             }
         }
@@ -82,25 +78,15 @@ class StoredItems: ObservableObject, Codable {
 }
 
 struct Code: Hashable, Codable {
-    let value: String
-    let object: String
-    let color: String
+    public var value: String
+    public var objectType: String
+    public var color: String
+    public var dateAdded: Date
     
-    init(value: String, object: String, color: String) {
+    init(value: String) {
         self.value = value
-        self.object = object
-        self.color = color
-    }
-    
-    func getValue() -> String {
-        return self.value
-    }
-    
-    func getObject() -> String {
-        return self.object
-    }
-    
-    func getColor() -> String {
-        return self.color
+        self.objectType = "None"
+        self.color = "None"
+        self.dateAdded = Date()
     }
 }
