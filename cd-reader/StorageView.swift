@@ -41,56 +41,80 @@ struct StorageView: View {
                             .stroke(.gray, lineWidth: 4)
                     )
                     HStack {
-                        Button(code.value, systemImage: "barcode") {
-                            
+                        Button {}
+                        label: {
+                            VStack {
+                                Image(systemName: "barcode")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .padding(15)
+                                Text("Barcode #").bold()
+                                Text(code.value)
+                            }
+                            .foregroundColor(.black)
+                            .background(Color.white)
+                            .cornerRadius(20)
+                            .frame(width: 175, height: 175)
+                            .shadow(radius: 5)
+                            .padding(5)
                         }
-                        .fixedSize(horizontal: false, vertical: true)
-                        .multilineTextAlignment(.center)
-                        .padding()
-                        .frame(width: 150, height: 150)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(.gray, lineWidth: 4)
-                        )
-                    
-                        Button(code.objectType, systemImage: "triangleshape") {
-                            
+                        
+                        Button {}
+                        label: {
+                            VStack {
+                                Image(systemName: "triangleshape")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .padding(15)
+                                Text("Object Type").bold()
+                                Text(code.objectType)
+                            }
+                            .foregroundColor(.black)
+                            .background(Color.white)
+                            .cornerRadius(20)
+                            .frame(width: 175, height: 175)
+                            .shadow(radius: 5)
+                            .padding(5)
                         }
-                        .fixedSize(horizontal: false, vertical: true)
-                        .multilineTextAlignment(.center)
-                        .padding()
-                        .frame(width: 150, height: 150)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(.gray, lineWidth: 4)
-                        )
                     }
                     HStack {
-                        Button(code.color, systemImage: "paintpalette") {
-                            
+                        Button{}
+                        label: {
+                            VStack {
+                                Image(systemName: "paintpalette")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .padding(15)
+                                Text("Color").bold()
+                                Text(code.color)
+                            }
+                            .foregroundColor(.black)
+                            .background(Color.white)
+                            .cornerRadius(20)
+                            .frame(width: 175, height: 175)
+                            .shadow(radius: 5)
+                            .padding(5)
                         }
-                            .fixedSize(horizontal: false, vertical: true)
-                            .multilineTextAlignment(.center)
-                            .padding()
-                            .frame(width: 150, height: 150)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(.gray, lineWidth: 4)
-                            )
                         
                         let formatter = DateFormatter()
                         let _ = formatter.dateStyle = .short
-                        Button(formatter.string(from: code.dateAdded), systemImage: "calendar") {
-                            
+                        Button {}
+                        label: {
+                            VStack {
+                                Image(systemName: "calendar")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .padding(15)
+                                Text("Date Added").bold()
+                                Text(formatter.string(from: code.dateAdded))
+                            }
+                            .foregroundColor(.black)
+                            .background(Color.white)
+                            .cornerRadius(20)
+                            .frame(width: 175, height: 175)
+                            .shadow(radius: 5)
+                            .padding(5)
                         }
-                            .fixedSize(horizontal: false, vertical: true)
-                            .multilineTextAlignment(.center)
-                            .padding()
-                            .frame(width: 150, height: 150)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(.gray, lineWidth: 4)
-                            )
                     }
                     Spacer()
                 }
@@ -101,5 +125,6 @@ struct StorageView: View {
 }
 
 #Preview {
-    
+    StorageView(tabSelection: .constant(0))
+        .environmentObject(StoredItems())
 }
