@@ -20,17 +20,16 @@ struct ReaderView: View {
             completion: { result in
                 if case let .success(code) = result {
                     
-                    let newCode = Code(value: code.string, object: "None", color: "None")
+                    let newCode = Code(value: code.string)
                     
                     if (storedItems.contains(code: newCode)) {
-                        self.scannedCode = newCode.getValue() + " is already in the storage"
+                        self.scannedCode = newCode.value + " is already in the storage"
                     }
                     else {
-                        self.scannedCode = newCode.getValue() + " has been added to the storage"
+                        self.scannedCode = newCode.value + " has been added to the storage"
                         self.storedItems.addToStorage(code: newCode)
                     }
                     self.isPresentingScanner = false
-                    self.storedItems.addToStorage(code: Code(value: "1234567890", object: "None", color: "None"))
                 }
             }
         )

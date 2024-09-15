@@ -27,7 +27,7 @@ struct cd_readerApp: App {
                 do {
                     try await storedItems.load()
                 } catch {
-                    fatalError(error.localizedDescription)
+                    print(error)
                 }
             }
         }
