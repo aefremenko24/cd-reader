@@ -42,7 +42,6 @@ struct StorageView: View {
                             .stroke(.gray, lineWidth: 4)
                     )
                     HStack {
-                        @State var value = code.value
                         Button {
                             showingAlert = true
                         }
@@ -63,6 +62,7 @@ struct StorageView: View {
                             .padding(5)
                         }
                         .alert("Change the barcode value", isPresented: $showingAlert) {
+                            @State var value = code.value
                             TextField("New Value:", text: $value)
                             Button("Save") {
                                 code.value = value
@@ -70,7 +70,6 @@ struct StorageView: View {
                             Button("Cancel", role: .cancel) { }
                         }
                         
-                        @State var objectType = code.objectType
                         Button {
                             showingAlert = true
                         }
@@ -91,6 +90,7 @@ struct StorageView: View {
                             .padding(5)
                         }
                         .alert("Change the barcode object type", isPresented: $showingAlert) {
+                            @State var objectType = code.objectType
                             TextField("New Object Type:", text: $objectType)
                             Button("Save") {
                                 code.objectType = objectType
@@ -99,7 +99,6 @@ struct StorageView: View {
                         }
                     }
                     HStack {
-                        @State var objectColor = code.color
                         Button{
                             showingAlert = true
                         }
@@ -120,6 +119,7 @@ struct StorageView: View {
                             .padding(5)
                         }
                         .alert("Change the color of the 3D object", isPresented: $showingAlert) {
+                            @State var objectColor = code.color
                             TextField("New Object Color:", text: $objectColor)
                             Button("Save") {
                                 code.color = objectColor
