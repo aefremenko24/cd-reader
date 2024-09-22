@@ -42,6 +42,7 @@ struct StorageView: View {
                             .stroke(.gray, lineWidth: 4)
                     )
                     HStack {
+                        @State var value = code.value
                         Button {
                             showingAlert = true
                         }
@@ -61,10 +62,15 @@ struct StorageView: View {
                             .shadow(radius: 5)
                             .padding(5)
                         }
-                        .alert("This is the numerical value of the barcode scanned previously", isPresented: $showingAlert) {
-                            Button("Got it", role: .cancel) { }
+                        .alert("Change the barcode value", isPresented: $showingAlert) {
+                            TextField("New Value:", text: $value)
+                            Button("Save") {
+                                code.value = value
+                            }
+                            Button("Cancel", role: .cancel) { }
                         }
                         
+                        @State var objectType = code.objectType
                         Button {
                             showingAlert = true
                         }
@@ -84,11 +90,16 @@ struct StorageView: View {
                             .shadow(radius: 5)
                             .padding(5)
                         }
-                        .alert("This is the type of object the barcode belongs to", isPresented: $showingAlert) {
-                            Button("Got it", role: .cancel) { }
+                        .alert("Change the barcode object type", isPresented: $showingAlert) {
+                            TextField("New Object Type:", text: $objectType)
+                            Button("Save") {
+                                code.objectType = objectType
+                            }
+                            Button("Cancel", role: .cancel) { }
                         }
                     }
                     HStack {
+                        @State var objectColor = code.color
                         Button{
                             showingAlert = true
                         }
@@ -108,8 +119,12 @@ struct StorageView: View {
                             .shadow(radius: 5)
                             .padding(5)
                         }
-                        .alert("This is the color of the 3D object represented by the barcode", isPresented: $showingAlert) {
-                            Button("Got it", role: .cancel) { }
+                        .alert("Change the color of the 3D object", isPresented: $showingAlert) {
+                            TextField("New Object Color:", text: $objectColor)
+                            Button("Save") {
+                                code.color = objectColor
+                            }
+                            Button("Cancel", role: .cancel) { }
                         }
                         
                         let formatter = DateFormatter()
@@ -134,7 +149,8 @@ struct StorageView: View {
                             .padding(5)
                         }
                         .alert("This is the date the barcode was added", isPresented: $showingAlert) {
-                            Button("Got it", role: .cancel) { }
+                            Text("The date cannot be changed.")
+                            Button("Cancel", role: .cancel) { }
                         }
                     }
                     Spacer()
