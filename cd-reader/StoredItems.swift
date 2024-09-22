@@ -77,7 +77,7 @@ class StoredItems: ObservableObject, Codable {
     }
 }
 
-struct Code: Hashable, Codable {
+class Code: Hashable, Codable {
     public var value: String
     public var objectType: String
     public var color: String
@@ -88,5 +88,17 @@ struct Code: Hashable, Codable {
         self.objectType = "None"
         self.color = "None"
         self.dateAdded = Date()
+    }
+    
+    func setValue(value: String) {
+        self.value = value
+    }
+    
+    static func ==(lhs: Code, rhs: Code) -> Bool {
+            return lhs.value == rhs.value
+    }
+    
+    func hash(into hasher: inout Hasher) {
+            hasher.combine(ObjectIdentifier(self))
     }
 }

@@ -13,6 +13,7 @@ struct StorageView: View {
     @EnvironmentObject var storedItems: StoredItems
     @Binding var tabSelection: Int
     @State private var path = NavigationPath()
+    @State private var showingAlert = false
     
     var body: some View {
         NavigationStack {
@@ -41,7 +42,9 @@ struct StorageView: View {
                             .stroke(.gray, lineWidth: 4)
                     )
                     HStack {
-                        Button {}
+                        Button {
+                            showingAlert = true
+                        }
                         label: {
                             VStack {
                                 Image(systemName: "barcode")
@@ -58,8 +61,13 @@ struct StorageView: View {
                             .shadow(radius: 5)
                             .padding(5)
                         }
+                        .alert("This is the numerical value of the barcode scanned previously", isPresented: $showingAlert) {
+                            Button("Got it", role: .cancel) { }
+                        }
                         
-                        Button {}
+                        Button {
+                            showingAlert = true
+                        }
                         label: {
                             VStack {
                                 Image(systemName: "triangleshape")
@@ -76,9 +84,14 @@ struct StorageView: View {
                             .shadow(radius: 5)
                             .padding(5)
                         }
+                        .alert("This is the type of object the barcode belongs to", isPresented: $showingAlert) {
+                            Button("Got it", role: .cancel) { }
+                        }
                     }
                     HStack {
-                        Button{}
+                        Button{
+                            showingAlert = true
+                        }
                         label: {
                             VStack {
                                 Image(systemName: "paintpalette")
@@ -95,10 +108,15 @@ struct StorageView: View {
                             .shadow(radius: 5)
                             .padding(5)
                         }
+                        .alert("This is the color of the 3D object represented by the barcode", isPresented: $showingAlert) {
+                            Button("Got it", role: .cancel) { }
+                        }
                         
                         let formatter = DateFormatter()
                         let _ = formatter.dateStyle = .short
-                        Button {}
+                        Button {
+                            showingAlert = true
+                        }
                         label: {
                             VStack {
                                 Image(systemName: "calendar")
@@ -115,12 +133,37 @@ struct StorageView: View {
                             .shadow(radius: 5)
                             .padding(5)
                         }
+                        .alert("This is the date the barcode was added", isPresented: $showingAlert) {
+                            Button("Got it", role: .cancel) { }
+                        }
                     }
                     Spacer()
                 }
                 .navigationTitle(code.value)
             }
         }
+    }
+    
+    func changeTextField(boxName: String, boxText: String, value: String) -> String {
+        var inputValue: String?
+        
+        let alertController = UIAlertController(title: "Barcode Value", message: "Enter a value for this barcode", preferredStyle: .alert)
+        alertController.addTextField { (textField) in
+            textField.placeholder = value
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
+
+            let input = alertController.textFields![0].text
+            inputValue = input
+
+        }
+
+        alertController.addAction(cancelAction)
+        alertController.addAction(saveAction)
+        
+        return inputValue!
     }
 }
 
